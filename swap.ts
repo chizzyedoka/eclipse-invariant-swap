@@ -21,15 +21,13 @@ import {
 
 import BN from "bn.js";
 import { getStoredKeypair } from "./get-keypair";
-import { get } from "http";
-
 
 // Eclipse testnet RPC endpoint
 const ECLIPSE_RPC_URL = "https://testnet.dev2.eclipsenetwork.xyz";
 
 // Token addresses on Eclipse 
-const SOL_MINT = new PublicKey("So11111111111111111111111111111111111111112"); // Wrapped SOL
-const USDT_MINT = new PublicKey("4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"); // USDC
+const SOL_MINT = new PublicKey("BeRUj3h7BqkbdfFU7FBNYbodgf8GCHodzKvF9aVjNNfL"); // Wrapped SOL
+const USDT_MINT = new PublicKey("CEBP3CqAbW4zdZA57H2wfaSG1QNdzQ72GiQEbQXyW9Tm"); // USDT
 
 // Constants for swap parameters
 const DEFAULT_SLIPPAGE = 0.01; // 1%
@@ -46,8 +44,8 @@ class InvariantEclipseTrader {
     this.wallet = getStoredKeypair();
   }
 
-  // 1. Generate wallet address
-  generateWallet(): string {
+  // 1. Get wallet address
+  getWallet(): string {
     console.log(
       "Generated new wallet address:",
       this.wallet.publicKey.toString()
@@ -80,6 +78,11 @@ class InvariantEclipseTrader {
   async showBalance(): Promise<void> {
     try {
       const balance = await this.connection.getBalance(this.wallet.publicKey);
+      console.log(
+        `Current balance for ${this.wallet.publicKey.toString()}: ${balance} lamports`
+      );
+
+      // Convert balance to SOL
       const solBalance = balance / LAMPORTS_PER_SOL;
 
       console.log("Wallet Balance:");
@@ -94,7 +97,7 @@ class InvariantEclipseTrader {
 
         const usdtAccount = await getAccount(this.connection, usdtTokenAccount);
         const usdtBalance = Number(usdtAccount.amount) / Math.pow(10, 6); // Assuming USDT has 6 decimals
-        console.log(`   USDT: ${usdtBalance.toFixed(6)} USDT`);
+        console.log(`USDT: ${usdtBalance.toFixed(6)} USDT`);
       } catch (error) {
         console.log("USDT: 0.000000 USDT (no account)");
       }
@@ -193,7 +196,7 @@ class InvariantEclipseTrader {
           transaction,
           [this.wallet]
         );
-        console.log("✅ Token accounts created:", signature);
+        console.log("Token accounts created:", signature);
       }
 
       return {
@@ -257,7 +260,7 @@ class InvariantEclipseTrader {
       console.log("Starting Invariant Eclipse Trading Demo...\n");
 
       // 1. Generate wallet
-      this.generateWallet();
+      this.getWallet();
       console.log("");
 
       // 2. Request airdrop
@@ -270,16 +273,16 @@ class InvariantEclipseTrader {
       console.log("");
 
       // Wait a moment for airdrop to settle
-      console.log("Waiting for network confirmation...");
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      // console.log("Waiting for network confirmation...");
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-      // 4. Perform swap
-      await this.swapSolToUsdt();
-      console.log("");
+      // // 4. Perform swap
+      // await this.swapSolToUsdt();
+      // console.log("");
 
-      // 5. Show final balance
-      console.log("Final Balance:");
-      await this.showBalance();
+      // // 5. Show final balance
+      // console.log("Final Balance:");
+      // await this.showBalance();
 
       console.log("\n Trading demo completed successfully!");
     } catch (error) {

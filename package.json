@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node swap.ts",
     "build": "tsc",
-    "dev": "ts-node --watch swap.ts"
+    "dev": "ts-node swap.ts"
   },
   "dependencies": {
     "@invariant-labs/sdk": "^0.9.72",
