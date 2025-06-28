@@ -1,0 +1,43 @@
+{
+  "name": "invariant-eclipse-trader",
+  "version": "1.0.0",
+  "description": "Trading script and API server for Invariant DEX on Eclipse network",
+  "main": "swap.ts",
+  "scripts": {
+    "start": "ts-node swap.ts",
+    "server": "node server.js",
+    "server:dev": "nodemon server.js",
+    "build": "tsc",
+    "dev": "ts-node swap.ts"
+  },
+  "dependencies": {
+    "@invariant-labs/sdk": "^0.9.72",
+    "@invariant-labs/sdk-eclipse": "^0.0.124",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/web3.js": "^1.95.0",
+    "bn.js": "^5.2.1",
+    "bs58": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.0.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "solana",
+    "eclipse",
+    "invariant",
+    "defi",
+    "trading",
+    "swap"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
