@@ -30,6 +30,8 @@ const {
   toDecimal,
 } = require('@invariant-labs/sdk-eclipse/lib/utils');
 
+const { deserializeSwap } = require('@deserialize/swap-sdk-eclipse');
+
 const base58 = require('bs58');
 require('dotenv').config();
 

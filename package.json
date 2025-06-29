@@ -7,10 +7,13 @@
     "start": "ts-node swap.ts",
     "server": "node server.js",
     "server:dev": "nodemon server.js",
+    "server:ts": "ts-node index.ts",
+    "server:ts:dev": "nodemon --exec ts-node index.ts",
     "build": "tsc",
     "dev": "ts-node swap.ts"
   },
   "dependencies": {
+    "@deserialize/swap-sdk": "^1.5.22",
     "@invariant-labs/sdk": "^0.9.72",
     "@invariant-labs/sdk-eclipse": "^0.0.124",
     "@solana/spl-token": "^0.4.8",
